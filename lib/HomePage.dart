@@ -97,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                   'Trending' + '🔥',
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.8),
-                    fontSize: 16,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(width: 10),
