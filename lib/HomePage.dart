@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         slivers: [
           SliverAppBar(
             centerTitle: true,
-            automaticallyImplyLeading: false,
+            // automaticallyImplyLeading: false,
             toolbarHeight: 60,
             pinned: true,
             expandedHeight: MediaQuery.of(context).size.height * 0.5,
@@ -54,6 +54,7 @@ class _HomePageState extends State<HomePage> {
                           viewportFraction: 1,
                           autoPlay: true,
                           autoPlayInterval: Duration(seconds: 2),
+                          height: MediaQuery.of(context).size.height
                         ),
                         items: trendinglist.map((i) {
                           return Builder(builder: (BuildContextcontest) {
@@ -62,7 +63,6 @@ class _HomePageState extends State<HomePage> {
                               child: GestureDetector(
                                 onTap: () {},
                                 child: Container(
-                                  height: 1500,
                                   width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                       //color: Colors.amber,
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                                     image: NetworkImage(
                                       'https://image.tmdb.org/t/p/w500${i['poster_path']}',
                                     ),
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                   )),
                                 ),
                               ),
