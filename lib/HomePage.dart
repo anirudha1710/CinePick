@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:carousel_slider/carousel_slider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,6 +12,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Future<void> trendinglisthome() async{
+    var trendingweekresponse = await http.get(Uri.parse(''));
+    if (trendingweekresponse.statusCode == 200){
+      var tempdata = jsonDecode(trendingweekresponse.body);
+      var trendingweekjson = tempdata['results'];
+    }
+  }
+int uval = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +35,17 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 16,
                   ),
                 ),
+                const SizedBox(width : 10),
               ],
             ),
-          )
+          ),
+            SliverList(delegate: SliverChildListDelegate([
+            Center(
+              child: Text('Simple text'),
+            ),
+          ],
+          ),
+          ),
         ],
       ),
     );
@@ -33,4 +53,4 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-// https:api.themoviedb.org/3/movie/upcoming?api_key=$apikey'
+// https://api.themoviedb.org/3/movie/upcoming?api_key=$apikey'
