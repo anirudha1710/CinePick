@@ -18,7 +18,7 @@ class _DescriptionCheckUiState extends State<DescriptionCheckUi> {
         id: widget.newid,
       );
     } else if (widget.newtype.toString() == 'tv') {
-      return tvseriesdetail(id: widget.newid);
+      return tvSeriesDetail(id: widget.newid);
     } else if (widget.newtype.toString() == 'person') {
       // return personDescriptionUi(widget.id);
     } else {

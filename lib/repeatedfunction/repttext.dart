@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget tittletext(String title) {
+Widget tittleText(String title) {
   return Text(title,
       style: TextStyle(
           decoration: TextDecoration.none,
@@ -11,7 +11,7 @@ Widget tittletext(String title) {
           letterSpacing: 1.25));
 }
 
-Widget boldtext(String title) {
+Widget boldText(String title) {
   return Text(title,
       style: TextStyle(
           fontFamily: 'open sans',
@@ -33,7 +33,7 @@ Widget normaltext(String title) {
           letterSpacing: 1.25));
 }
 
-Widget datetext(String title) {
+Widget dateText(String title) {
   return Text(title,
       style: TextStyle(
           fontFamily: 'open sans',
@@ -44,9 +44,9 @@ Widget datetext(String title) {
           letterSpacing: 1.02));
 }
 
-Widget ratingtext(String title) {
+Widget ratingText(String title) {
   return Text(title,
-      style: TextStyle(
+      style: const TextStyle(
           fontFamily: 'open sans',
           decoration: TextDecoration.none,
           color: Colors.white,
@@ -55,7 +55,7 @@ Widget ratingtext(String title) {
           letterSpacing: 1.02));
 }
 
-Widget ultratittletext(String title) {
+Widget ultraTittleText(String title) {
   return Text(title,
       style: TextStyle(
           decoration: TextDecoration.none,
@@ -66,29 +66,35 @@ Widget ultratittletext(String title) {
           letterSpacing: 1.25));
 }
 
-Widget genrestext(String title) {
-  return Text(title,
-      style: TextStyle(
-          fontFamily: 'open sans',
-          decoration: TextDecoration.none,
-          color: Colors.white,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          letterSpacing: 1.25));
+Widget genresText(String title) {
+  return Text(
+    title,
+    style: const TextStyle(
+      fontFamily: 'open sans',
+      decoration: TextDecoration.none,
+      color: Colors.white,
+      fontSize: 12,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 1.25,
+    ),
+  );
 }
 
 Widget overviewtext(String title) {
-  return Text(title,
-      style: TextStyle(
-          fontFamily: 'open sans',
-          decoration: TextDecoration.none,
-          color: Colors.white.withOpacity(0.9),
-          fontSize: 15,
-          fontWeight: FontWeight.w400,
-          letterSpacing: 1.25));
+  return Text(
+    title,
+    style: TextStyle(
+      fontFamily: 'open sans',
+      decoration: TextDecoration.none,
+      color: Colors.white.withOpacity(0.9),
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 1.25,
+    ),
+  );
 }
 
-Widget Tabbartext(String title) {
+Widget tabBarText(String title) {
   return Text(title,
       style: TextStyle(
           fontFamily: 'open sans',

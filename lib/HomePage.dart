@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cine_pick/repeatedfunction/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
-import '../RepeatedFunction/Drawer.dart';
-import 'RepeatedFunction/repttext.dart';
 import 'apikey/apikey.dart';
 import 'details/checker.dart';
+import 'repeatedfunction/repttext.dart';
 import 'repeatedfunction/searchbarfunc.dart';
 import 'sectionPage/movies.dart';
 import 'sectionPage/tvSeries.dart';
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     TabController tabController = TabController(length: 3, vsync: this);
 
     return Scaffold(
-        drawer: drawerfunc(),
+        drawer: drawerFunc(),
         backgroundColor: const Color.fromRGBO(18, 18, 18, 0.5),
         body: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
           SliverAppBar(
@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           //////////////////////////////////////////////End of Flexible bar///////////////////////////////////////////////////////////////
           SliverList(
               delegate: SliverChildListDelegate([
-                const searchbarfun(),
+                const searchBarFun(),
                 SizedBox(
                     height: 45,
                     width: MediaQuery.of(context).size.width,
@@ -277,9 +277,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(30),
                             color: Colors.amber.withOpacity(0.4)),
                         tabs: [
-                          Tab(child: Tabbartext('Tv Series')),
-                          Tab(child: Tabbartext('Movies')),
-                          Tab(child: Tabbartext('Upcoming'))
+                          Tab(child: tabBarText('Tv Series')),
+                          Tab(child: tabBarText('Movies')),
+                          Tab(child: tabBarText('Upcoming'))
                         ])),
                 SizedBox(
                     height: 1100,

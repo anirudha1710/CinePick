@@ -1,7 +1,4 @@
-import 'package:cine_pick/sectionPage/favoriateList.dart';
-import 'package:flutter/gestures.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
+import 'package:cine_pick/sectionPage/favouriteList.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,167 +9,164 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class drawerfunc extends StatefulWidget {
-  drawerfunc({
+class drawerFunc extends StatefulWidget {
+  const drawerFunc({
     super.key,
   });
 
   @override
-  State<drawerfunc> createState() => _drawerfuncState();
+  State<drawerFunc> createState() => _drawerFuncState();
 }
 
-class _drawerfuncState extends State<drawerfunc> {
+class _drawerFuncState extends State<drawerFunc> {
   File? _image;
 
-  Future<void> SelectImage() async {
-    // final pickedfile =
-    //     await ImagePicker().(source: ImageSource.gallery);
-    // if (pickedfile != null) {
-    //   CroppedFile? cropped = await ImageCropper().cropImage(
-    //     sourcePath: pickedfile.path,
-    //     aspectRatioPresets: [
-    //       CropAspectRatioPreset.square,
-    //       CropAspectRatioPreset.ratio3x2,
-    //       CropAspectRatioPreset.original,
-    //       CropAspectRatioPreset.ratio4x3,
-    //       CropAspectRatioPreset.ratio16x9
-    //     ],
-    //   );
-    //   SharedPreferences sp = await SharedPreferences.getInstance();
-    //   sp.setString('imagepath', cropped!.path);
-    //   _image = cropped as File?;
-    // } else {
-    //   print('No image selected.');
-    // }
-  }
+  Future<void> selectImage() async {}
 
   @override
   void initState() {
     super.initState();
-    SharedPreferences.getInstance().then((sp) {
-      setState(() {
-        _image = File(sp.getString('imagepath')!);
-      });
-    });
+    SharedPreferences.getInstance().then(
+      (sp) {
+        setState(
+          () {
+            _image = File(sp.getString('imagePath')!);
+          },
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Color.fromRGBO(18, 18, 18, 0.9),
+        color: const Color.fromRGBO(18, 18, 18, 0.9),
         child: ListView(
           children: [
             DrawerHeader(
-              child: Container(
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () async {
-                        await SelectImage();
-                        //toast message
-                        Fluttertoast.showToast(
-                            msg: "Image Changed",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.grey,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
-                      },
-                      child: _image == null
-                          ? CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage('assets/user.png'),
-                      )
-                          : CircleAvatar(
-                        radius: 50,
-                        backgroundImage: FileImage(_image!),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'Welcome',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )
-                  ],
-                ),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      await selectImage();
+                      //toast message
+                      Fluttertoast.showToast(
+                          msg: "Image Changed",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          backgroundColor: Colors.grey,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    },
+                    child: _image == null
+                        ? const CircleAvatar(
+                            radius: 50,
+                            backgroundImage: AssetImage('assets/user.png'),
+                          )
+                        : CircleAvatar(
+                            radius: 50,
+                            backgroundImage: FileImage(_image!),
+                          ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    'Welcome',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  )
+                ],
               ),
             ),
-            listtilefunc('Home', Icons.home, ontap: () {
-              //close drawer
-              Navigator.pop(context);
-            }),
-            listtilefunc('Favorite', Icons.favorite, ontap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => FavoriateMovies()));
-            }),
-            listtilefunc('Our Blogs', FontAwesomeIcons.blogger,
-                ontap: () async {
-                  //webview for blog
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Scaffold(
-                              backgroundColor: Color.fromRGBO(18, 18, 18, 0.5),
-                              appBar: AppBar(
-                                backgroundColor: Color.fromRGBO(18, 18, 18, 0.9),
-                                title: Text('Our Blogs'),
-                              ),
-                              body: WebViewWidget(controller: WebViewController(
-
-
-                              ),)
-
-                            // body: WebView(
-                            //   initialUrl: 'https://niranjandahal.com.np/',
-                            //   javascriptMode: JavascriptMode.unrestricted,
-                            // ),
-                          )));
-                }),
-            listtilefunc('Our Website', FontAwesomeIcons.solidNewspaper,
-                ontap: () async {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Scaffold(
-                            backgroundColor: Color.fromRGBO(18, 18, 18, 0.5),
-                            appBar: AppBar(
-                              backgroundColor: Color.fromRGBO(18, 18, 18, 0.9),
-                              title: Text('Our Website'),
-                            ),
-                            // body: WebView(
-                            //   initialUrl:
-                            //       'https://niranjandahalyt.blogspot.com/',
-                            //   javascriptMode: JavascriptMode.unrestricted,
-                            // ),
-                          )));
-                }),
-            listtilefunc('Subscribe US', FontAwesomeIcons.youtube,
-                ontap: () async {
-                  var url =
-                      'https://www.youtube.com/channel/UCeJnnsTq-Lh9E16kCEK49rQ?sub_confirmation=1';
-                  await launch(url);
-                }),
-            listtilefunc('About', Icons.info, ontap: () {
-              showDialog(
+            listTitleFunc(
+              'Home',
+              Icons.home,
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            listTitleFunc(
+              'Favorite',
+              Icons.favorite,
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FavoriateMovies()));
+              },
+            ),
+            listTitleFunc(
+              'Our Blogs',
+              FontAwesomeIcons.blogger,
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      backgroundColor: const Color.fromRGBO(18, 18, 18, 0.5),
+                      appBar: AppBar(
+                        backgroundColor: const Color.fromRGBO(18, 18, 18, 0.9),
+                        title: const Text('Our Blogs'),
+                      ),
+                      body: WebViewWidget(
+                        controller: WebViewController(),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            listTitleFunc(
+              'Our Website',
+              FontAwesomeIcons.solidNewspaper,
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      backgroundColor: const Color.fromRGBO(18, 18, 18, 0.5),
+                      appBar: AppBar(
+                        backgroundColor: const Color.fromRGBO(18, 18, 18, 0.9),
+                        title: const Text('Our Website'),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+            listTitleFunc(
+              'Subscribe US',
+              FontAwesomeIcons.youtube,
+              onTap: () async {
+                var url =
+                    'https://www.youtube.com/channel/UCeJnnsTq-Lh9E16kCEK49rQ?sub_confirmation=1';
+                await launch(url);
+              },
+            ),
+            listTitleFunc(
+              'About',
+              Icons.info,
+              onTap: () {
+                showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: Color.fromRGBO(18, 18, 18, 0.9),
+                      backgroundColor: const Color.fromRGBO(18, 18, 18, 0.9),
                       title: overviewtext(
-                          'This App is made by Niranjan Dahal.User can explore,get Details of latest Movies/series.TMDB API is used to fetch data.'),
+                          'This App is made by Anirudha Sharma .User can explore,get Details of latest Movies/series.TMDB API is used to fetch data.'),
                       actions: [
                         TextButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text('Ok'))
+                            child: const Text('Ok'))
                       ],
                     );
-                  });
-            }),
-            listtilefunc('Quit', Icons.exit_to_app_rounded, ontap: () {
+                  },
+                );
+              },
+            ),
+            listTitleFunc('Quit', Icons.exit_to_app_rounded, onTap: () {
               SystemNavigator.pop();
             }),
           ],
@@ -182,9 +176,9 @@ class _drawerfuncState extends State<drawerfunc> {
   }
 }
 
-Widget listtilefunc(String title, IconData icon, {Function? ontap}) {
+Widget listTitleFunc(String title, IconData icon, {Function? onTap}) {
   return GestureDetector(
-    onTap: ontap as void Function()?,
+    onTap: onTap as void Function()?,
     child: ListTile(
       leading: Icon(
         icon,
@@ -192,7 +186,7 @@ Widget listtilefunc(String title, IconData icon, {Function? ontap}) {
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
     ),
   );

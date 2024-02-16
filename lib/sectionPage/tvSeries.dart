@@ -94,9 +94,9 @@ class _TvSeriesState extends State<TvSeries> {
             return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  sliderlist(populartvseries, "Popular Now", "tv", 20),
-                  sliderlist(onairtvseries, "On Air Now", "tv", 20),
-                  sliderlist(topratedtvseries, "Top Rated", "tv", 20)
+                  sliderList(populartvseries, "Popular Now", "tv", 20),
+                  sliderList(onairtvseries, "On Air Now", "tv", 20),
+                  sliderList(topratedtvseries, "Top Rated", "tv", 20)
                 ]);
           }
         });

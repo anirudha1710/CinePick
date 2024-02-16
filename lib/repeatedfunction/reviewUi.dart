@@ -1,24 +1,24 @@
 import 'package:cine_pick/repeatedfunction/repttext.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
+class reviewUi extends StatefulWidget {
+  List revDetails = [];
 
-class ReviewUI extends StatefulWidget {
-  List revdeatils = [];
-  ReviewUI({required this.revdeatils});
+  reviewUi({super.key, required this.revDetails});
 
   @override
-  State<ReviewUI> createState() => _ReviewUIState();
+  State<reviewUi> createState() => _reviewUiState();
 }
 
-class _ReviewUIState extends State<ReviewUI> {
+class _reviewUiState extends State<reviewUi> {
   bool showall = false;
 
   @override
   Widget build(BuildContext context) {
-    List REviewDetails = widget.revdeatils;
-    if (REviewDetails.length == 0) {
-      return Center();
+    List reViewDetails = widget.revDetails;
+    if (reViewDetails.isEmpty) {
+      return const Center();
     } else {
       return Column(
         children: [
@@ -26,7 +26,7 @@ class _ReviewUIState extends State<ReviewUI> {
             padding: const EdgeInsets.only(right: 20, bottom: 10, top: 10),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Text(
                     'User Reviews',
                     style: TextStyle(
@@ -45,50 +45,49 @@ class _ReviewUIState extends State<ReviewUI> {
                     children: [
                       showall == false
                           ? Text(
-                        'All Reviews ' + '${REviewDetails.length} ',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      )
-                          : Text(
-                        'Show Less',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Icon(
+                              'All Reviews ' + '${reViewDetails.length} ',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          : const Text(
+                              'Show Less',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                      const Icon(
                         Icons.arrow_forward_ios,
                         color: Colors.white,
                         size: 20,
-                      )
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          //
-          //show only one review
           showall == true
-              ? Container(
-              height: MediaQuery.of(context).size.height * 0.65,
-              child: ListView.builder(
-                  physics:  BouncingScrollPhysics(),
-                  itemCount: REviewDetails.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                        top: 20,
-                        right: 20,
-                        bottom: 10,
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: reViewDetails.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                          top: 20,
+                          right: 20,
+                          bottom: 10,
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
                                   flex: 2,
                                   child: Row(
                                     children: [
@@ -96,54 +95,55 @@ class _ReviewUIState extends State<ReviewUI> {
                                         height: 50,
                                         width: 50,
                                         decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                                image: NetworkImage(
-                                                    REviewDetails[index]
-                                                    ['avatarphoto']),
-                                                fit: BoxFit.cover)),
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              reViewDetails[index]
+                                                  ['avatarPhoto'],
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           FittedBox(
                                             fit: BoxFit.scaleDown,
                                             child: Text(
-                                              REviewDetails[index]['name'],
-                                              style: TextStyle(
+                                              reViewDetails[index]['name'],
+                                              style: const TextStyle(
                                                   color: Colors.white,
                                                   fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Text(
-                                            REviewDetails[index]
-                                            ['creationdate'],
-                                            style: TextStyle(
+                                            reViewDetails[index]
+                                                ['creation date'],
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 12,
-                                                fontWeight:
-                                                FontWeight.bold),
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ],
                                       ),
                                     ],
-                                  )),
-                              Expanded(
+                                  ),
+                                ),
+                                Expanded(
                                   flex: 1,
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      FittedBox(
+                                      const FittedBox(
                                         fit: BoxFit.scaleDown,
                                         child: Icon(
                                           Icons.star,
@@ -151,51 +151,53 @@ class _ReviewUIState extends State<ReviewUI> {
                                           size: 20,
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
                                       FittedBox(
                                         fit: BoxFit.scaleDown,
                                         child: Text(
-                                          REviewDetails[index]['rating'],
-                                          style: TextStyle(
+                                          reViewDetails[index]['rating'],
+                                          style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ],
-                                  ))
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: overviewtext(
-                                  REviewDetails[index]['review'],
+                                  ),
                                 ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  }))
-              : Container(
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  top: 20,
-                  right: 20,
-                  bottom: 10,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: overviewtext(
+                                    reViewDetails[index]['review'],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                    right: 20,
+                    bottom: 10,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
                             flex: 2,
                             child: Row(
                               children: [
@@ -205,33 +207,32 @@ class _ReviewUIState extends State<ReviewUI> {
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
-                                          image: NetworkImage(REviewDetails[0]
-                                          ['avatarphoto']),
+                                          image: NetworkImage(
+                                              reViewDetails[0]['avatarPhoto']),
                                           fit: BoxFit.cover)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     FittedBox(
                                       fit: BoxFit.scaleDown,
                                       child: Text(
-                                        REviewDetails[0]['name'],
-                                        style: TextStyle(
+                                        reViewDetails[0]['name'],
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 5,
                                     ),
                                     Text(
-                                      REviewDetails[0]['creationdate'],
-                                      style: TextStyle(
+                                      reViewDetails[0]['creationDate'],
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold),
@@ -239,13 +240,14 @@ class _ReviewUIState extends State<ReviewUI> {
                                   ],
                                 ),
                               ],
-                            )),
-                        Expanded(
+                            ),
+                          ),
+                          Expanded(
                             flex: 1,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                FittedBox(
+                                const FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: Icon(
                                     Icons.star,
@@ -253,43 +255,44 @@ class _ReviewUIState extends State<ReviewUI> {
                                     size: 20,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 FittedBox(
                                   fit: BoxFit.scaleDown,
                                   child: Text(
-                                    REviewDetails[0]['rating'],
-                                    style: TextStyle(
+                                    reViewDetails[0]['rating'],
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],
-                            ))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: overviewtext(
-                            REviewDetails[0]['review'],
+                            ),
                           ),
-                        )
-                      ],
-                    ),
-                    //show more button
-                  ],
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: overviewtext(
+                              reViewDetails[0]['review'],
+                            ),
+                          )
+                        ],
+                      ),
+                      //show more button
+                    ],
+                  ),
                 ),
-              ))
         ],
       );
     }
   }
 }
 
-// Widget ReviewUII(context, List REviewDetails) {}
+// Widget ReviewUII(context, List reviewDetails) {}

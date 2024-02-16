@@ -1,17 +1,15 @@
 import 'dart:convert';
 import 'package:cine_pick/HomePage.dart';
-import 'package:cine_pick/RepeatedFunction/repttext.dart';
 import 'package:cine_pick/apikey/apikey.dart';
 import 'package:cine_pick/repeatedfunction/favouriteAndShare.dart';
+import 'package:cine_pick/repeatedfunction/repttext.dart';
 import 'package:cine_pick/repeatedfunction/reviewUi.dart';
 import 'package:cine_pick/repeatedfunction/slider.dart';
 import 'package:cine_pick/repeatedfunction/trailerUI.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
 
@@ -172,65 +170,57 @@ class _MovieDetailsState extends State<MovieDetails> {
               physics: const BouncingScrollPhysics(),
               slivers: [
                 SliverAppBar(
-                    automaticallyImplyLeading: false,
-                    leading: IconButton(
+                  automaticallyImplyLeading: false,
+                  leading: IconButton(
+                      onPressed: () {
+                        SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+                            overlays: [SystemUiOverlay.bottom]);
+                        // SystemChrome.setEnabledSystemUIMode(
+                        //     SystemUiMode.manual,
+                        //     overlays: []);
+                        SystemChrome.setPreferredOrientations(
+                          [
+                            DeviceOrientation.portraitUp,
+                            DeviceOrientation.portraitDown,
+                          ],
+                        );
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(FontAwesomeIcons.circleArrowLeft),
+                      iconSize: 28,
+                      color: Colors.white),
+                  actions: [
+                    IconButton(
                         onPressed: () {
-                          SystemChrome.setEnabledSystemUIMode(
-                              SystemUiMode.manual,
-                              overlays: [SystemUiOverlay.bottom]);
-                          // SystemChrome.setEnabledSystemUIMode(
-                          //     SystemUiMode.manual,
-                          //     overlays: []);
-                          SystemChrome.setPreferredOrientations(
-                            [
-                              DeviceOrientation.portraitUp,
-                              DeviceOrientation.portraitDown,
-                            ],
-                          );
-                          Navigator.pop(context);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomePage()),
+                              (route) => false);
                         },
-                        icon: const Icon(FontAwesomeIcons.circleArrowLeft),
-                        iconSize: 28,
-                        color: Colors.white),
-                    actions: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()),
-                                (route) => false);
-                          },
-                          icon: const Icon(FontAwesomeIcons.houseUser),
-                          iconSize: 25,
-                          color: Colors.white)
-                    ],
-                    backgroundColor: const Color.fromRGBO(18, 18, 18, 0.5),
-                    centerTitle: false,
-                    pinned: true,
-                    expandedHeight: MediaQuery.of(context).size.height * 0.4,
-                    flexibleSpace: FlexibleSpaceBar(
-                      collapseMode: CollapseMode.parallax,
-                      background: FittedBox(
-                        fit: BoxFit.fill,
-                        child: trailerwatch(
-                          trailerytid: movieTrailerList[0]['key'],
-                        ),
+                        icon: const Icon(FontAwesomeIcons.houseUser),
+                        iconSize: 25,
+                        color: Colors.white)
+                  ],
+                  backgroundColor: const Color.fromRGBO(18, 18, 18, 0.5),
+                  centerTitle: false,
+                  pinned: true,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.4,
+                  flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
+                    background: FittedBox(
+                      fit: BoxFit.fill,
+                      child: trailerwatch(
+                        trailerytid: movieTrailerList[0]['key'],
                       ),
-                      // background: FittedBox(
-                      //   fit: BoxFit.fill,
-                      //   child: Container(
-                      //     child: trailer watch(
-                      //       trailered: movie trailers list[0]['key'],
-                      //     ),
-                      //   ),
-                      // ),
-                    )),
+                    ),
+                  ),
+                ),
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
                       //add to favourite button
-                      addtofavoriate(
+                      addToFavourite(
                         id: widget.id,
                         type: 'movie',
                         Details: movieDetails,
@@ -260,7 +250,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                                                 25, 25, 25, 1),
                                             borderRadius:
                                                 BorderRadius.circular(10)),
-                                        child: genrestext(moviesGenres[index]));
+                                        child: genresText(moviesGenres[index]));
                                   },
                                 ),
                               ),
@@ -277,15 +267,15 @@ class _MovieDetailsState extends State<MovieDetails> {
                                       color:
                                           const Color.fromRGBO(25, 25, 25, 1),
                                       borderRadius: BorderRadius.circular(10)),
-                                  child: genrestext(
+                                  child: genresText(
                                       '${movieDetails[0]['runtime']} min'))
                             ],
-                          )
+                          ),
                         ],
                       ),
                       Padding(
                           padding: const EdgeInsets.only(left: 20, top: 10),
-                          child: tittletext('Movie Story :')),
+                          child: tittleText('Movie Story :')),
                       Padding(
                           padding: const EdgeInsets.only(left: 20, top: 10),
                           child: overviewtext(
@@ -293,7 +283,7 @@ class _MovieDetailsState extends State<MovieDetails> {
 
                       Padding(
                         padding: const EdgeInsets.only(left: 20, top: 10),
-                        child: ReviewUI(revdeatils: userReviews),
+                        child: reviewUi(revDetails: userReviews),
                       ),
                       Padding(
                           padding: const EdgeInsets.only(left: 20, top: 20),
@@ -307,13 +297,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                           padding: const EdgeInsets.only(left: 20, top: 20),
                           child: normaltext(
                               'Revenue : ${movieDetails[0]['revenue']}')),
-                      sliderlist(similarMoviesList, "Similar Movies", "movie",
+                      sliderList(similarMoviesList, "Similar Movies", "movie",
                           similarMoviesList.length),
-                      sliderlist(recommendedMoviesList, "Recommended Movies",
+                      sliderList(recommendedMoviesList, "Recommended Movies",
                           "movie", recommendedMoviesList.length),
-                      // Container(
-                      //     height: 50,
-                      //     child: Center(child: normalText))
                     ],
                   ),
                 ),
