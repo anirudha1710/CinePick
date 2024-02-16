@@ -21,7 +21,6 @@ class _TvSeriesState extends State<TvSeries> {
       'https://api.themoviedb.org/3/tv/top_rated?api_key=$apikey';
   var onairtvseriesurl =
       'https://api.themoviedb.org/3/tv/on_the_air?api_key=$apikey';
-
   Future<void> tvseriesfunction() async {
     /////////////////////////////////////////////
     var populartvresponse = await http.get(Uri.parse(populartvseriesurl));
@@ -86,21 +85,20 @@ class _TvSeriesState extends State<TvSeries> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: tvseriesfunction(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting)
-          return Center(
-              child: CircularProgressIndicator(color: Colors.amber.shade400));
-        else {
-          return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                sliderlist(populartvseries, "Popular Now", "tv", 20),
-                sliderlist(onairtvseries, "On Air Now", "tv", 20),
-                sliderlist(topratedtvseries, "Top Rated", "tv", 20)
-              ]);
-        }
-      },
-    );
+        future: tvseriesfunction(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting)
+            return Center(
+                child: CircularProgressIndicator(color: Colors.amber.shade400));
+          else {
+            return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  sliderlist(populartvseries, "Popular Now", "tv", 20),
+                  sliderlist(onairtvseries, "On Air Now", "tv", 20),
+                  sliderlist(topratedtvseries, "Top Rated", "tv", 20)
+                ]);
+          }
+        });
   }
 }

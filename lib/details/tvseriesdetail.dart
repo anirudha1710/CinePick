@@ -11,15 +11,15 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
-class TvSeriesDetails extends StatefulWidget {
+class tvseriesdetail extends StatefulWidget {
   var id;
-  TvSeriesDetails({this.id});
+  tvseriesdetail({this.id});
 
   @override
-  State<TvSeriesDetails> createState() => _TvSeriesDetailsState();
+  State<tvseriesdetail> createState() => _tvseriesdetailState();
 }
 
-class _TvSeriesDetailsState extends State<TvSeriesDetails> {
+class _tvseriesdetailState extends State<tvseriesdetail> {
   var tvseriesdetaildata;
   List<Map<String, dynamic>> TvSeriesDetails = [];
   List<Map<String, dynamic>> TvSeriesREview = [];

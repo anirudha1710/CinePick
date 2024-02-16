@@ -56,7 +56,7 @@ class FavMovielist {
   }
 
 //delete from database by tmdbid and tmdbtype
-  Future deleteSpecific(String id, String type) async {
+  Future deletespecific(String id, String type) async {
     Database? db = await _instance.db;
     return await db!.delete(tablename,
         where: '$columnfavid = ? AND $columnfavtype = ?',

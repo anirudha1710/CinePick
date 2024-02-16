@@ -33,7 +33,7 @@ Widget sliderlist(
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => TvSeriesDetails(
+                              builder: (context) => tvseriesdetail(
                                   id: firstlistname[index]['id'])));
                     }
                   },
