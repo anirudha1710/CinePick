@@ -37,6 +37,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.2.1
   http: ^1.1.0
+  font_awesome_flutter: ^10.3.0
+  fluttertoast: ^8.1.2
+  url_launcher: ^6.1.7
+  shared_preferences: ^2.1.2
+  webview_flutter: ^4.4.2
+  youtube_player_flutter: ^8.1.1
+  image_cropper: ^5.0.1
+  image_picker: ^1.0.5
+  path_provider: ^2.0.11
+  sqflite: ^2.2.2
 
 dev_dependencies:
   flutter_test:

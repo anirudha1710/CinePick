@@ -1,9 +1,13 @@
 import 'dart:convert';
 
 import 'package:cine_pick/apilinks/alllinks.dart';
+import 'package:cine_pick/sectionPage/movies.dart';
+import 'package:cine_pick/sectionPage/tvSeries.dart';
+import 'package:cine_pick/sectionPage/upcomming.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:carousel_slider/carousel_slider.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +16,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   List<Map<String, dynamic>> trendinglist = [];
 
   Future<void> trendinglisthome() async {
@@ -31,8 +35,7 @@ class _HomePageState extends State<HomePage> {
           });
         }
       }
-    }
-    else if (uval == 2) {
+    } else if (uval == 2) {
       var trendingdayresponse = await http.get(Uri.parse(trendingdayurl));
       if (trendingdayresponse.statusCode == 200) {
         var tempdata = jsonDecode(trendingdayresponse.body);
@@ -47,15 +50,15 @@ class _HomePageState extends State<HomePage> {
           });
         }
       }
-    }
-    else{}
+    } else {}
   }
-
 
   int uval = 1;
 
   @override
   Widget build(BuildContext context) {
+    TabController _tabController = TabController(length: 3, vsync: this);
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -138,7 +141,10 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       autofocus: true,
-                      underline: Container(height: 0, color: Colors.transparent,),
+                      underline: Container(
+                        height: 0,
+                        color: Colors.transparent,
+                      ),
                       dropdownColor: Colors.black.withOpacity(0.6),
                       icon: Icon(
                         Icons.arrow_drop_down_sharp,
@@ -182,6 +188,38 @@ class _HomePageState extends State<HomePage> {
                 Center(
                   child: Text('Simple text'),
                 ),
+                Container(
+                  height: 45,
+                  width: MediaQuery.of(context).size.width,
+                  child: TabBar(
+                    physics: BouncingScrollPhysics(),
+                    labelPadding: EdgeInsets.symmetric(horizontal: 25),
+                    isScrollable: true,
+                    controller: _tabController,
+                    indicator: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.amber.withOpacity(0.4)),
+                    tabs: [
+                      Tab(
+                        child: Text('Tv Series'),
+                      ),
+                      Tab(
+                        child: Text('Movies'),
+                      ),
+                      Tab(
+                        child: Text('Upcoming'),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                    height: 1100,
+                    width: MediaQuery.of(context).size.width,
+                    child: TabBarView(controller: _tabController, children: const [
+                      TvSeries(),
+                      Movie(),
+                      Upcomming(),
+                    ]))
               ],
             ),
           ),
