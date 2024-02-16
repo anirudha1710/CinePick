@@ -14,24 +14,46 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> trendinglist = [];
+
   Future<void> trendinglisthome() async {
-    var trendingweekresponse = await http.get(Uri.parse(trendingweekurl));
-    if (trendingweekresponse.statusCode == 200) {
-      var tempdata = jsonDecode(trendingweekresponse.body);
-      var trendingweekjson = tempdata['results'];
-      for (var i = 0; i < trendingweekjson.length; i++) {
-        trendinglist.add({
-          'id': trendingweekjson[i]['id'],
-          'poster_path': trendingweekjson[i]['poster_path'],
-          'vote_average': trendingweekjson[i]['vote_average'],
-          'media_type': trendingweekjson[i]['media_type'],
-          'indexno': i,
-        });
+    if (uval == 1) {
+      var trendingweekresponse = await http.get(Uri.parse(trendingweekurl));
+      if (trendingweekresponse.statusCode == 200) {
+        var tempdata = jsonDecode(trendingweekresponse.body);
+        var trendingweekjson = tempdata['results'];
+        for (var i = 0; i < trendingweekjson.length; i++) {
+          trendinglist.add({
+            'id': trendingweekjson[i]['id'],
+            'poster_path': trendingweekjson[i]['poster_path'],
+            'vote_average': trendingweekjson[i]['vote_average'],
+            'media_type': trendingweekjson[i]['media_type'],
+            'indexno': i,
+          });
+        }
       }
     }
+    else if (uval == 2) {
+      var trendingdayresponse = await http.get(Uri.parse(trendingdayurl));
+      if (trendingdayresponse.statusCode == 200) {
+        var tempdata = jsonDecode(trendingdayresponse.body);
+        var trendingweekjson = tempdata['results'];
+        for (var i = 0; i < trendingweekjson.length; i++) {
+          trendinglist.add({
+            'id': trendingweekjson[i]['id'],
+            'poster_path': trendingweekjson[i]['poster_path'],
+            'vote_average': trendingweekjson[i]['vote_average'],
+            'media_type': trendingweekjson[i]['media_type'],
+            'indexno': i,
+          });
+        }
+      }
+    }
+    else{}
   }
 
+
   int uval = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,11 +73,10 @@ class _HomePageState extends State<HomePage> {
                     if (snapshot.connectionState == ConnectionState.done) {
                       return CarouselSlider(
                         options: CarouselOptions(
-                          viewportFraction: 1,
-                          autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 2),
-                          height: MediaQuery.of(context).size.height
-                        ),
+                            viewportFraction: 1,
+                            autoPlay: true,
+                            autoPlayInterval: Duration(seconds: 2),
+                            height: MediaQuery.of(context).size.height),
                         items: trendinglist.map((i) {
                           return Builder(builder: (BuildContextcontest) {
                             return GestureDetector(
@@ -102,6 +123,56 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(width: 10),
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: DropdownButton(
+                      onChanged: (value) {
+                        setState(() {
+                          trendinglist.clear();
+                          uval = int.parse(value.toString());
+                        });
+                      },
+                      autofocus: true,
+                      underline: Container(height: 0, color: Colors.transparent,),
+                      dropdownColor: Colors.black.withOpacity(0.6),
+                      icon: Icon(
+                        Icons.arrow_drop_down_sharp,
+                        color: Colors.amber,
+                        size: 30,
+                      ),
+                      value: uval,
+                      items: [
+                        DropdownMenuItem(
+                          child: Text(
+                            'Weekly',
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                          value: 1,
+                        ),
+                        DropdownMenuItem(
+                          child: Text(
+                            'Daily',
+                            style: TextStyle(
+                              decoration: TextDecoration.none,
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                          value: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
