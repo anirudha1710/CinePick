@@ -30,7 +30,7 @@ class _addtofavoriateState extends State<addtofavoriate> {
         print('notanythingfound');
         favoriatecolor = Colors.white;
       } else {
-        //print the tmdbname and tmdbid and tmdbtype and tmdbrating from database
+        //print the tmdbame and tmdbid and tmdbtype and tmdbrating from database
 
         print('surelyfound');
         favoriatecolor = Colors.red;
@@ -65,7 +65,7 @@ class _addtofavoriateState extends State<addtofavoriate> {
           textColor: Colors.white,
           fontSize: 16.0);
     } else if (customcolor == Colors.red) {
-      FavMovielist().deletespecific(id, type);
+      FavMovielist().deleteSpecific(id, type);
       favoriatecolor = Colors.white;
       Fluttertoast.showToast(
           msg: "Removed from Favorite",
