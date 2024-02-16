@@ -62,11 +62,11 @@ class _drawerFuncState extends State<drawerFunc> {
                     },
                     child: _image == null
                         ? const CircleAvatar(
-                            radius: 50,
-                            backgroundImage: AssetImage('assets/user.png'),
+                            radius: 45,
+                            backgroundImage: AssetImage('assets/images/user.png'),
                           )
                         : CircleAvatar(
-                            radius: 50,
+                            radius: 45,
                             backgroundImage: FileImage(_image!),
                           ),
                   ),
@@ -139,7 +139,7 @@ class _drawerFuncState extends State<drawerFunc> {
               FontAwesomeIcons.youtube,
               onTap: () async {
                 var url =
-                    'https://www.youtube.com/channel/UCeJnnsTq-Lh9E16kCEK49rQ?sub_confirmation=1';
+                    '';
                 await launch(url);
               },
             ),
