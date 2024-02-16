@@ -153,7 +153,7 @@ class _searchbarfunState extends State<searchbarfun> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  descriptioncheckui(
+                                                  DescriptionCheckUi(
                                                     searchresult[index]
                                                     ['id'],
                                                     searchresult[index]

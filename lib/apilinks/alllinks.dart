@@ -1,28 +1,28 @@
 import 'package:cine_pick/apikey/apikey.dart';
 
-String trendingweekurl =
+String trendingWeekUrl =
     'https://api.themoviedb.org/3/trending/all/week?api_key=$apikey';
 
-String trendingdayurl =
+String trendingDayUrl =
     'https://api.themoviedb.org/3/trending/all/day?api_key=$apikey';
 
-String populartvseriesurl =
+String popularTvSeriesUrl =
     'https://api.themoviedb.org/3/tv/popular?api_key=$apikey';
 
-String topratedtvseriesurl =
+String topRatedTvSeriesUrl =
     'https://api.themoviedb.org/3/tv/top_rated?api_key=$apikey';
 
-String onairtvseriesurl =
+String onAirTvSeriesUrl =
     'https://api.themoviedb.org/3/trending/on_the_air?api_key=$apikey';
 
-String popularmoviesurl =
+String popularMoviesUrl =
     'https://api.themoviedb.org/3/movie/popular?api_key=$apikey';
 
-String nowplayingmoviesurl =
+String nowPlayingMoviesUrl =
     'https://api.themoviedb.org/3/movie/now_playing?api_key=$apikey';
 
-String topratedmoviesurl =
+String topRatedMoviesUrl =
     'https://api.themoviedb.org/3/movie/top_rated?api_key=$apikey';
 
-String upcommingmoviesurl =
+String upComingMoviesUrl =
     'https://api.themoviedb.org/3/movie/latest?api_key=$apikey';

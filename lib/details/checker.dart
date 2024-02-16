@@ -2,17 +2,17 @@ import 'package:cine_pick/details/movies.dart';
 import 'package:cine_pick/details/tvseriesdetail.dart';
 import 'package:flutter/material.dart';
 
-class descriptioncheckui extends StatefulWidget {
-  var newid;
-  var newtype;
-  descriptioncheckui(this.newid, this.newtype);
+class DescriptionCheckUi extends StatefulWidget {
+  final  newid;
+  final  newtype;
+  const DescriptionCheckUi(this.newid, this.newtype, {super.key});
 
   @override
-  State<descriptioncheckui> createState() => _descriptioncheckuiState();
+  State<DescriptionCheckUi> createState() => _DescriptionCheckUiState();
 }
 
-class _descriptioncheckuiState extends State<descriptioncheckui> {
-  checktype() {
+class _DescriptionCheckUiState extends State<DescriptionCheckUi> {
+  checkType() {
     if (widget.newtype.toString() == 'movie') {
       return MovieDetails(
         id: widget.newid,
@@ -20,19 +20,19 @@ class _descriptioncheckuiState extends State<descriptioncheckui> {
     } else if (widget.newtype.toString() == 'tv') {
       return tvseriesdetail(id: widget.newid);
     } else if (widget.newtype.toString() == 'person') {
-      // return persondescriptionui(widget.id);
+      // return personDescriptionUi(widget.id);
     } else {
-      return errorui(context);
+      return errorUi(context);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return checktype();
+    return checkType();
   }
 }
 
-Widget errorui(context) {
+Widget errorUi(context) {
   return Scaffold(
     appBar: AppBar(
       title: const Text('Error'),

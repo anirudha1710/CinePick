@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:cine_pick/HomePage.dart';
 import 'package:cine_pick/apikey/apikey.dart';
-import 'package:cine_pick/repeatedfunction/favoriateandshare.dart';
+import 'package:cine_pick/repeatedfunction/favouriteAndShare.dart';
 import 'package:cine_pick/repeatedfunction/repttext.dart';
-import 'package:cine_pick/repeatedfunction/reviewui.dart';
+import 'package:cine_pick/repeatedfunction/reviewUi.dart';
 import 'package:cine_pick/repeatedfunction/slider.dart';
 import 'package:cine_pick/repeatedfunction/trailerUI.dart';
 import 'package:flutter/material.dart';

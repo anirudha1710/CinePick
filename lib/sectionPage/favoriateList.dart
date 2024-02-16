@@ -115,7 +115,7 @@ class _FavoriateMoviesState extends State<FavoriateMovies> {
                                   onTap: () {
                                     Navigator.push(context, MaterialPageRoute(
                                       builder: (context) {
-                                        return descriptioncheckui(
+                                        return DescriptionCheckUi(
                                             snapshot.data![index]['tmdbid']
                                                 .toString(),
                                             snapshot.data![index]['tmdbtype']
